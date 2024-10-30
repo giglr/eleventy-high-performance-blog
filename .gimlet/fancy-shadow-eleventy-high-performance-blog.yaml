@@ -1,0 +1,23 @@
+app: eleventy-high-performance-blog
+env: fancy-shadow
+namespace: default
+chart:
+  repository: https://chart.onechart.dev
+  name: onechart
+  version: 0.70.0
+values:
+  containerPort: 3000
+  gitRepository: giglr/eleventy-high-performance-blog
+  gitSha: '{{ .SHA }}'
+  image:
+    dockerfile: ""
+    registry: containerizedRegistry
+    repository: 127.0.0.1:32447/{{ .APP }}
+    strategy: buildpacks
+    tag: '{{ .SHA }}'
+  imagePullSecrets:
+    - '{{ .APP }}-containerizedregistry-pullsecret'
+  ingress:
+    host: locahost
+  resources:
+    ignoreLimits: true
